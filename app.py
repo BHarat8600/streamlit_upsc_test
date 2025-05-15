@@ -17,7 +17,7 @@ llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=1.5, groq_api_key=GR
 template = PromptTemplate(
     input_variables=["subject"],
     template="""
-You are a UPSC civil services prelims paper-setter. Create one high-quality MCQ for the subject: {subject}.
+You are a UPSC civil services prelims paper-setter. Analyse previous 10 year of upsc civil services and past 1 year current affier, Create one high-quality MCQ for the subject: {subject}.
 Format output strictly as JSON (without code block markers like ```):
 
 {{
