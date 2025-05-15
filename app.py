@@ -1,17 +1,18 @@
 import streamlit as st
 from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
-import json
+import json, os, time
 
+# Constants
+CACHE_FILE = "questions_cache.json"
+EXPIRY_DURATION = 86400  # 24 hours
 
-# 🔐 Replace with your actual Groq API key
+# Langchain & API setup
 GROQ_API_KEY = st.secrets.get("LLM_API_KEY")
 
-llm = ChatGroq(
-    model="llama-3.3-70b-versatile",
-    temperature=1.5,
-    groq_api_key=GROQ_API_KEY
-)
+#GROQ_API_KEY = st.secrets.get("LLM_API_KEY")
+
+llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=1.5, groq_api_key=GROQ_API_KEY)
 
 template = PromptTemplate(
     input_variables=["subject"],
@@ -28,6 +29,68 @@ Format output strictly as JSON (without code block markers like ```):
 """
 )
 
+# Styling
+st.markdown("""
+<style>
+body {
+    background-color: #eef2f7;
+}
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(120deg, #f4f6f9, #dfe9f3);
+}
+.stButton > button {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+.stRadio > div {
+    background-color: white;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+</style>
+""", unsafe_allow_html=True)
+
+# Cache utils
+def load_cache():
+    if os.path.exists(CACHE_FILE):
+        with open(CACHE_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+def save_cache(cache):
+    with open(CACHE_FILE, "w") as f:
+        json.dump(cache, f, indent=2)
+
+def is_cache_valid(timestamp):
+    return (time.time() - timestamp) < EXPIRY_DURATION
+
+def generate_questions(subject):
+    new_questions = []
+    for _ in range(15):
+        result = (template | llm).invoke({"subject": subject})
+        try:
+            q_json = json.loads(result.content.strip())
+            new_questions.append(q_json)
+        except Exception as e:
+            print("❌ Parse failed:", e)
+    return new_questions
+
+def get_questions(subject):
+    cache = load_cache()
+    if subject in cache and is_cache_valid(cache[subject]["timestamp"]):
+        return cache[subject]["questions"]
+    else:
+        questions = generate_questions(subject)
+        cache[subject] = {
+            "questions": questions,
+            "timestamp": time.time()
+        }
+        save_cache(cache)
+        return questions
 
 # Session state setup
 if "quiz_started" not in st.session_state:
@@ -40,19 +103,8 @@ if "current_index" not in st.session_state:
     st.session_state.current_index = 0
 if "subject" not in st.session_state:
     st.session_state.subject = None
-
-
-def generate_questions(subject):
-    st.session_state.questions = []
-    for _ in range(15):
-        result = (template | llm).invoke({"subject": subject})
-        try:
-            q_json = json.loads(result.content.strip())
-            st.session_state.questions.append(q_json)
-        except Exception as e:
-            print("❌ Failed to parse question:", e, "\nReturned content:\n", result.content)
-
-
+if "skipped" not in st.session_state:
+    st.session_state.skipped = []
 
 def reset_quiz():
     st.session_state.quiz_started = False
@@ -60,21 +112,38 @@ def reset_quiz():
     st.session_state.answers = []
     st.session_state.current_index = 0
     st.session_state.subject = None
+    st.session_state.skipped = []
 
 
-# --- UI ---
+# def reset_quiz():
+#     for key in ["quiz_started", "questions", "answers", "current_index", "subject", "skipped"]:
+#         st.session_state[key] = [] if "list" in str(type(st.session_state.get(key))) else None
+#     st.session_state.quiz_started = False
 
-st.title("🧠 UPSC MCQ Generator")
+index = st.session_state.current_index or 0
+
+# --- MAIN APP ---
+st.title("UPSC Mock Test MCQ")
 
 if not st.session_state.quiz_started:
-    st.subheader("Choose a subject to start the quiz:")
+    st.subheader("📘 Choose a subject:")
     subjects = ["Polity", "History", "Geography", "Economy"]
     subject = st.selectbox("Subject", subjects)
 
-    if st.button("Start Test"):
+    # if st.button("Start Test"):
+    #     st.session_state.subject = subject
+    #     st.session_state.quiz_started = True
+    #     with st.spinner("🔄 Kindly wait please... Generating questions..."):
+    #         generate_questions(subject)
+
+
+    if st.button("🚀 Start Test"):
         st.session_state.subject = subject
+        st.session_state.questions = get_questions(subject)
         st.session_state.quiz_started = True
-        generate_questions(subject)
+        with st.spinner("🔄 Kindly wait please..."):
+            generate_questions(subject)
+        
 
 else:
     questions = st.session_state.questions
@@ -82,39 +151,56 @@ else:
 
     if index < len(questions):
         q = questions[index]
-        st.write(f"**Question {index + 1} of {len(questions)}:**")
-        st.markdown(q["question"])
-        selected = st.radio("Options", q["options"], key=f"q_{index}")
+        st.markdown(f"### ❓ Question {index + 1} of {len(questions)}")
+        st.markdown(f"**{q['question']}**")
+        selected = st.radio("Choose your answer:", q["options"], key=f"q_{index}")
 
-        if st.button("Submit Answer"):
-            is_correct = selected.strip()[0] == q["answer"].strip()
-            st.session_state.answers.append({
-                "question": q["question"],
-                "selected": selected,
-                "correct": q["answer"],
-                "is_correct": is_correct,
-                "explanation": q["explanation"]
-            })
-            st.session_state.current_index += 1
-            st.rerun()
-
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("✅ Submit Answer"):
+                is_correct = selected.strip()[0] == q["answer"].strip()
+                st.session_state.answers.append({
+                    "question": q["question"],
+                    "selected": selected,
+                    "correct": q["answer"],
+                    "is_correct": is_correct,
+                    "explanation": q["explanation"]
+                })
+                st.session_state.current_index += 1
+                st.rerun()
+        with col2:
+            if st.button("⏭️ Skip"):
+                st.session_state.skipped.append(q)
+                st.session_state.current_index += 1
+                st.rerun()
     else:
+        st.balloons()
         st.success("🎉 Test Completed!")
         answers = st.session_state.answers
         total = len(answers)
         correct = sum(1 for a in answers if a["is_correct"])
-        percent = round((correct / total) * 100, 2)
+        incorrect = total - correct
+        skipped = len(st.session_state.skipped)
+        negative_marks = round((1/3) * incorrect, 2)
+        score = round(correct - negative_marks, 2)
 
-        st.markdown(f"**Score:** {correct}/{total} ({percent}%)")
+        st.markdown(f"### 📊 Final Score: **{score}** (Correct: {correct}, Incorrect: {incorrect}, Skipped: {skipped})")
+        st.markdown(f"🟥 Negative marking applied: **-{negative_marks}**")
 
-        with st.expander("📋 Review Answers"):
+        with st.expander("📋 Review Your Answers"):
             for i, a in enumerate(answers, 1):
-                st.write(f"**Q{i}.** {a['question']}")
-                st.write(f"Your Answer: {a['selected']} | Correct: {a['correct']}")
-                st.write(f"✅ Correct!" if a["is_correct"] else "❌ Incorrect.")
+                st.markdown(f"**Q{i}.** {a['question']}")
+                st.markdown(f"- Your Answer: `{a['selected']}` | Correct: `{a['correct']}`")
+                st.markdown("✅ Correct!" if a["is_correct"] else "❌ Incorrect.")
                 st.markdown(f"**Explanation:** {a['explanation']}")
                 st.markdown("---")
+            if skipped:
+                st.markdown("### ⏭️ Skipped Questions")
+                for i, sq in enumerate(st.session_state.skipped, 1):
+                    st.markdown(f"**Skipped Q{i}.** {sq['question']}")
+                    st.markdown(f"**Answer:** {sq['answer']} — {sq['explanation']}")
+                    st.markdown("---")
 
-        if st.button("Restart Quiz"):
+        if st.button("🔁 Restart Quiz"):
             reset_quiz()
-            st.experimental_rerun()
+            st.rerun()
