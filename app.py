@@ -33,7 +33,7 @@ Format output strictly as JSON (without code block markers like ```):
 st.markdown("""
 <style>
 body {
-    background-color: #eef2f7;
+    background-color: #000000;
 }
 [data-testid="stAppViewContainer"] {
     background: linear-gradient(120deg, #f4f6f9, #dfe9f3);
@@ -123,7 +123,7 @@ def reset_quiz():
 index = st.session_state.current_index or 0
 
 # --- MAIN APP ---
-st.markdown("UPSC Mock Test MCQ")
+st.title("UPSC Mock Test MCQ")
 
 if not st.session_state.quiz_started:
     st.subheader("📘 Choose a subject:")
