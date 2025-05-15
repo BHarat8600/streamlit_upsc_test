@@ -123,7 +123,7 @@ def reset_quiz():
 index = st.session_state.current_index or 0
 
 # --- MAIN APP ---
-st.title("UPSC Mock Test MCQ")
+st.markdown("UPSC Mock Test MCQ")
 
 if not st.session_state.quiz_started:
     st.subheader("📘 Choose a subject:")
