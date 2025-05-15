@@ -61,7 +61,16 @@ st.markdown("""
     padding: 10px;
     border-radius: 6px;
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+    color: #22c55e !important; /* ✅ Tailwind green-500 */
 }
+
+
+# .stRadio > div {
+#     background-color: #111827;
+#     padding: 10px;
+#     border-radius: 6px;
+#     box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+# }
 
 /* Title and headers */
 h1, h2, h3, h4, h5, h6 {
