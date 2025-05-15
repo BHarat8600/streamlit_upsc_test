@@ -3,8 +3,9 @@ from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 import json
 
+
 # 🔐 Replace with your actual Groq API key
-GROQ_API_KEY = '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'
+GROQ_API_KEY = st.secrets.get("LLM_API_KEY")
 
 llm = ChatGroq(
     model="llama-3.3-70b-versatile",
