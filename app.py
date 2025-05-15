@@ -46,7 +46,7 @@ body {
     border-radius: 8px;
 }
 .stRadio > div {
-    background-color: white;
+    background-color: black;
     padding: 10px;
     border-radius: 6px;
     box-shadow: 0 0 6px rgba(0,0,0,0.1);
