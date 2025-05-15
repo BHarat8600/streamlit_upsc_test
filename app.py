@@ -29,30 +29,97 @@ Format output strictly as JSON (without code block markers like ```):
 """
 )
 
-# Styling
+#modified last
 st.markdown("""
 <style>
-body {
-    background-color: #000000;
-}
+/* Entire app container background */
 [data-testid="stAppViewContainer"] {
-    background: linear-gradient(120deg, #f4f6f9, #dfe9f3);
+    background: linear-gradient(120deg, #2e3b4e, #1e293b);
+    padding: 1rem;
+    color: #ffffff !important;
 }
+
+/* Force white text throughout */
+.stMarkdown, .stText, .stRadio label, .stSelectbox, .stButton {
+    color: #ffffff !important;
+}
+
+/* Buttons */
 .stButton > button {
     background-color: #4CAF50;
-    color: white;
+    color: white !important;
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
+
+/* Radio buttons */
 .stRadio > div {
-    background-color: black;
+    background-color: #111827;
     padding: 10px;
     border-radius: 6px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+}
+
+/* Title and headers */
+h1, h2, h3, h4, h5, h6 {
+    color: #e2e8f0 !important;
+}
+
+/* Custom question box */
+.question-box {
+    background: #1f2937;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .stButton button {
+        font-size: 14px !important;
+        padding: 8px 16px !important;
+    }
+    .stRadio > div {
+        font-size: 14px !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
+
+
+
+
+
+
+
+# # Styling
+# st.markdown("""
+# <style>
+# body {
+#     background-color: #000000;
+# }
+# [data-testid="stAppViewContainer"] {
+#     background: linear-gradient(120deg, #f4f6f9, #dfe9f3);
+# }
+# .stButton > button {
+#     background-color: #4CAF50;
+#     color: white;
+#     font-weight: bold;
+#     padding: 10px 20px;
+#     border-radius: 8px;
+# }
+# .stRadio > div {
+#     background-color: black;
+#     padding: 10px;
+#     border-radius: 6px;
+#     box-shadow: 0 0 6px rgba(0,0,0,0.1);
+# }
+# </style>
+# """, unsafe_allow_html=True)
 
 # Cache utils
 def load_cache():
