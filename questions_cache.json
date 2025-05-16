@@ -1,0 +1,320 @@
+{
+  "Polity": {
+    "questions": [
+      {
+        "question": "Which of the following statements regarding the powers of the Governor of a state in India is correct?",
+        "options": [
+          "A. The Governor has the power to appoint the Chief Minister without the aid and advice of the Cabinet.",
+          "B. The Governor has the power to reserve a bill passed by the state legislature for the consideration of the President.",
+          "C. The Governor has the power to dismiss the Council of Ministers unilaterally.",
+          "D. The Governor has the power to appoint judges to the High Court of the state."
+        ],
+        "answer": "B",
+        "explanation": "According to Article 200 of the Constitution of India, the Governor of a state has the power to reserve a bill passed by the state legislature for the consideration of the President. This provision allows the Governor to exercise a check on the legislative power of the state legislature. The other options are incorrect because the appointment of the Chief Minister is done on the aid and advice of the Cabinet, the Governor can dismiss the Council of Ministers only in exceptional circumstances, and the appointment of judges to the High Court is done by the President in consultation with the Chief Justice of India and the Governor of the state."
+      },
+      {
+        "question": "Which of the following statements regarding the Indian Parliament is correct?",
+        "options": [
+          "A. The Parliament of India is a uni-cameral legislature.",
+          "B. The Parliament of India has the power to make laws on subjects listed in the Union List, the State List, and the Concurrent List.",
+          "C. The Rajya Sabha has the power to initiate a Money Bill.",
+          "D. The Lok Sabha can have a maximum of 552 members."
+        ],
+        "answer": "B",
+        "explanation": "The Parliament of India is a bi-cameral legislature consisting of the Lok Sabha and the Rajya Sabha. According to Article 248 and the Seventh Schedule of the Constitution of India, the Parliament has the power to make laws on subjects listed in the Union List (which includes areas like defence, foreign affairs), the State List (which includes areas like law and order, health), and the Concurrent List (which includes areas like education, marriage)."
+      },
+      {
+        "question": "Which of the following statements is correct regarding the role of the Comptroller and Auditor General (CAG) of India?",
+        "options": [
+          "A. The CAG is accountable to the Parliament of India for the performance of its duties.",
+          "B. The CAG is appointed by the President of India and can be removed from office in the manner of a judge of the Supreme Court.",
+          "C. The CAG has the power to impose penalties on government officials for financial irregularities.",
+          "D. The CAG is responsible for the formulation of budgets for the central and state governments."
+        ],
+        "answer": "B",
+        "explanation": "The Comptroller and Auditor General (CAG) of India is appointed by the President of India and can be removed from office in the manner of a judge of the Supreme Court, as provided by Article 148 of the Constitution of India. This provides the CAG with independence and autonomy to perform its duties without fear or favor."
+      },
+      {
+        "question": "Which of the following statements is correct regarding the appointment of the Governor of a state in India?",
+        "options": [
+          "A. The Governor is elected by the state legislature.",
+          "B. The Governor is appointed by the President of India.",
+          "C. The Governor is nominated by the Chief Minister of the state.",
+          "D. The Governor is selected through a national competitive examination."
+        ],
+        "answer": "B",
+        "explanation": "According to Article 155 of the Indian Constitution, the Governor of a state is appointed by the President of India. The President appoints the Governor on the advice of the Union Council of Ministers, and the term of the Governor is typically five years."
+      },
+      {
+        "question": "Which of the following is a feature of the 73rd Constitutional Amendment Act, 1992?",
+        "options": [
+          "A. It mandated the creation of a village level court in every panchayat",
+          "B. It added Part IX to the Constitution, dealing with the Panchayats",
+          "C. It made the right to property a fundamental right",
+          "D. It provided for the reservation of seats for women in the state legislatures"
+        ],
+        "answer": "B",
+        "explanation": "The 73rd Constitutional Amendment Act, 1992 added Part IX to the Constitution, dealing with the Panchayats. This amendment aimed to provide constitutional status to the three-tier panchayati raj system, ensuring their regular elections, and assigning them specific powers and functions."
+      },
+      {
+        "question": "Which of the following statements is correct regarding the role of the Attorney General of India?",
+        "options": [
+          "A. The Attorney General of India is appointed by the President on the advice of the Council of Ministers headed by the Chief Minister of the state with the largest population.",
+          "B. The Attorney General of India is appointed by the President and has the right of audience in all courts in India.",
+          "C. The Attorney General of India can only appear before the Supreme Court of India.",
+          "D. The Attorney General of India is elected by the members of both Houses of Parliament."
+        ],
+        "answer": "B",
+        "explanation": "The Attorney General of India is the chief legal advisor to the Government of India, appointed by the President under Article 76 of the Indian Constitution. According to Article 76(2), the Attorney General has the right of audience in all courts in India, which means the Attorney General has the right to appear and argue cases before any court of law in the country."
+      },
+      {
+        "question": "Which of the following statements about the office of the Governor of a state in India is correct?",
+        "options": [
+          "A. The Governor is elected by the members of the State Legislature.",
+          "B. The Governor holds office during the pleasure of the President.",
+          "C. The Governor has a fixed tenure of five years.",
+          "D. The Governor is accountable to the Parliament of India."
+        ],
+        "answer": "B",
+        "explanation": "According to Article 155 of the Indian Constitution, the Governor of a state is appointed by the President and holds office during the pleasure of the President. This means that the President can remove the Governor at any time, making option B the correct answer."
+      },
+      {
+        "question": "Which of the following statements regarding the Indian Parliament is correct?",
+        "options": [
+          "A. A Money Bill can be introduced only in the Rajya Sabha.",
+          "B. A Money Bill can be introduced only in the Lok Sabha.",
+          "C. A Money Bill can be introduced in either House of Parliament.",
+          "D. A Money Bill requires the approval of the President before introduction in Parliament."
+        ],
+        "answer": "B",
+        "explanation": "According to Article 109 of the Indian Constitution, a Money Bill can be introduced only in the Lok Sabha, and not in the Rajya Sabha. The Lok Sabha has the exclusive power to introduce and pass Money Bills, which are then sent to the Rajya Sabha for its recommendations."
+      },
+      {
+        "question": "Which of the following statements about the Central Vigilance Commission (CVC) is correct?",
+        "options": [
+          "A. It is a constitutional body established under Article 324 of the Indian Constitution.",
+          "B. It is a statutory body established under the Central Vigilance Commission Act, 2003.",
+          "C. It is an executive body established by an Order of the President of India.",
+          "D. It is a judicial body established under Article 311 of the Indian Constitution."
+        ],
+        "answer": "B",
+        "explanation": "The Central Vigilance Commission (CVC) is a statutory body established under the Central Vigilance Commission Act, 2003. It is an autonomous body that exercises superintendence over the functioning of the Central Bureau of Investigation (CBI) in respect of the investigation of offences under the Prevention of Corruption Act, 1988. The CVC is headed by a Central Vigilance Commissioner who is appointed by the President of India on the recommendations of a committee consisting of the Prime Minister, the Minister of Home Affairs, and the Leader of the Opposition in the Lok Sabha."
+      },
+      {
+        "question": "Which of the following statements is true regarding the 73rd Constitutional Amendment Act, 1992?",
+        "options": [
+          "A. It added Article 25A to the Constitution, dealing with National Commission for Minorities.",
+          "B. It added Part IX to the Constitution, dealing with the Panchayats.",
+          "C. It added Article 21A to the Constitution, dealing with the Right to Education.",
+          "D. It added Part XIV to the Constitution, dealing with the Union Territories."
+        ],
+        "answer": "B",
+        "explanation": "The 73rd Constitutional Amendment Act, 1992, added Part IX to the Constitution, which deals with the Panchayats. This amendment aimed to strengthen and democratize local self-government in rural areas by providing a constitutional status to the three-tier Panchayati Raj system. It inserted Articles 243 to 243(O) and also added the Eleventh Schedule to the Constitution, listing 29 subjects that can be devolved to the Panchayats."
+      },
+      {
+        "question": "Which of the following statements is correct regarding the appointment of the Governor of a state in India?",
+        "options": [
+          "A. The Governor is elected by the state legislature.",
+          "B. The Governor is appointed by the President of India.",
+          "C. The Governor is nominated by the Chief Minister of the state.",
+          "D. The Governor is selected through a national eligibility test."
+        ],
+        "answer": "B",
+        "explanation": "According to Article 155 of the Constitution of India, the Governor of a state is appointed by the President of India. The President appoints the Governor on the advice of the Union Council of Ministers, and the Governor holds office at the pleasure of the President."
+      },
+      {
+        "question": "Which of the following statements regarding the powers of the Governor of a state in India is correct?",
+        "options": [
+          "A. The Governor has the power to appoint the Chief Minister of the state without consulting anyone.",
+          "B. The Governor has the power to reserve certain bills for the consideration of the President.",
+          "C. The Governor cannot dissolve the Legislative Assembly of the state.",
+          "D. The Governor is not bound by the aid and advice of the Council of Ministers."
+        ],
+        "answer": "B",
+        "explanation": "According to Article 200 of the Indian Constitution, the Governor of a state has the power to reserve certain bills for the consideration of the President. This means that if the Governor thinks a bill passed by the state legislature is not in the best interest of the state or is against the provisions of the Constitution, he/she can reserve it for the President's consideration rather than giving assent. This power is an important check on the legislative authority of the state government."
+      },
+      {
+        "question": "Which of the following statements about the office of the Governor of a state in India is correct?",
+        "options": [
+          "A. The Governor is elected by the state legislative assembly.",
+          "B. The Governor holds office during the pleasure of the President.",
+          "C. The Governor has a fixed tenure of five years.",
+          "D. The Governor is accountable to the state legislative council."
+        ],
+        "answer": "B",
+        "explanation": "According to Article 156 of the Indian Constitution, the Governor holds office during the pleasure of the President, which means that the President can remove the Governor at any time. The other options are incorrect because the Governor is appointed by the President, not elected by the state legislative assembly; the Governor's tenure is not fixed and can be terminated by the President; and the Governor is not accountable to the state legislative council."
+      },
+      {
+        "question": "Which of the following statements regarding the Ninth Schedule of the Constitution of India is correct?",
+        "options": [
+          "A. It deals with the powers of the state governments.",
+          "B. It contains a list of laws which cannot be questioned in a court of law.",
+          "C. It provides for the formation of tribal advisory councils.",
+          "D. It specifies the procedure for the removal of the President."
+        ],
+        "answer": "B",
+        "explanation": "The Ninth Schedule of the Constitution of India was added by the First Amendment in 1951 and it contains a list of laws which are protected from judicial review, meaning that they cannot be questioned in a court of law on the grounds that they violate the fundamental rights guaranteed by the Constitution. This was done to prevent the judiciary from striking down laws aimed at implementing the policy of land reform and the abolition of the zamindari system, which were key priorities of the government at that time."
+      },
+      {
+        "question": "Which of the following statements about the Indian Parliament is correct?",
+        "options": [
+          "A. The Parliament of India is a unicameral legislature.",
+          "B. The Parliament of India is a bicameral legislature, consisting of the Lok Sabha and the Rajya Sabha.",
+          "C. The Parliament of India has three houses: the Lok Sabha, the Rajya Sabha, and the Vidhan Sabha.",
+          "D. The Lok Sabha is a permanent house and the Rajya Sabha is dissolved from time to time."
+        ],
+        "answer": "B",
+        "explanation": "The Parliament of India is a bicameral legislature, consisting of two houses: the Lok Sabha (House of the People) and the Rajya Sabha (Council of States). This bicameral system provides a checks-and-balances mechanism, ensuring that power is evenly distributed between the houses and no single chamber dominates the lawmaking process."
+      }
+    ],
+    "timestamp": 1747320909.9412737
+  },
+  "Geography": {
+    "questions": [
+      {
+        "question": "The mountain range that runs along the border between France and Spain is",
+        "options": [
+          "A. The Alps",
+          "B. The Pyrenees",
+          "C. The Carpathians",
+          "D. The Apennines"
+        ],
+        "answer": "B",
+        "explanation": "The Pyrenees is a mountain range that stretches for approximately 435 kilometers from the Atlantic Ocean to the Mediterranean Sea, forming a natural border between France and Spain. The range is home to a diverse range of flora and fauna and is known for its unique cultural and geographical characteristics."
+      },
+      {
+        "question": "The mountain range that separates the Great Plains of India from the Deccan Plateau is",
+        "options": [
+          "A. Aravalli Range",
+          "B. Satpura Range",
+          "C. Vindhya Range",
+          "D. Western Ghats"
+        ],
+        "answer": "C",
+        "explanation": "The Vindhya Range serves as a dividing line between the Great Plains of India, which include the Indo-Gangetic Plain, and the Deccan Plateau in the south. This range stretches across central India and plays a significant role in shaping the country's geography and climate."
+      },
+      {
+        "question": "The mountain range that separates the Ladakh district from the Tibet Autonomous Region is",
+        "options": [
+          "A. The Karakoram Range",
+          "B. The Great Himalayan Range",
+          "C. The Zanskar Range",
+          "D. The Kailash Range"
+        ],
+        "answer": "A",
+        "explanation": "The correct answer is A, as the Karakoram Range forms the northern boundary of the Ladakh district and separates it from the Tibet Autonomous Region. The Karakoram Range is a mountain range in the northwestern part of the Indian subcontinent, stretching from the Pamir Mountains in the west to the Tibetan Plateau in the east."
+      },
+      {
+        "question": "Which of the following types of rocks is formed as a result of the alteration of existing rocks under high temperature and pressure conditions?",
+        "options": [
+          "A. Igneous rocks",
+          "B. Metamorphic rocks",
+          "C. Sedimentary rocks",
+          "D. Foliated rocks"
+        ],
+        "answer": "B",
+        "explanation": "Metamorphic rocks are formed through the process of metamorphism, where existing rocks are transformed by heat, pressure, and chemical processes, resulting in changes to their mineral composition and structure. This can occur due to tectonic forces, mountain building, or contact metamorphism near magma bodies."
+      },
+      {
+        "question": "The mountain range that separates the Ladakh region from the Tibet Autonomous Region is",
+        "options": [
+          "A. The Greater Himalayas",
+          "B. The Karakoram range",
+          "C. The Zanskar range",
+          "D. The Kailash range"
+        ],
+        "answer": "B",
+        "explanation": "The Karakoram range acts as a border between the Ladakh region of India and the Tibet Autonomous Region of China. It is a significant mountain range with some of the highest peaks in the world, including K2, the second highest peak after Mount Everest."
+      },
+      {
+        "question": "The mountain range that runs along the border between France and Spain is known as",
+        "options": [
+          "A. The Alps",
+          "B. The Pyrenees",
+          "C. The Carpathians",
+          "D. The Apennines"
+        ],
+        "answer": "B",
+        "explanation": "The Pyrenees is a mountain range that stretches for approximately 435 kilometers along the border between France and Spain, forming a natural divide between the two countries. It is home to several notable peaks, including Pico de Aneto, the highest point in the range."
+      },
+      {
+        "question": "Which of the following straits separates the continents of Asia and Africa?",
+        "options": [
+          "A. Bosphorus",
+          "B. Bab-el-Mandeb",
+          "C. Strait of Malacca",
+          "D. Sunda Strait"
+        ],
+        "answer": "B",
+        "explanation": "The Bab-el-Mandeb is a strait located between Yemen on the Arabian Peninsula (Asia) and Djibouti and Eritrea in the Horn of Africa, connecting the Red Sea to the Guardafui Channel and the Gulf of Aden. It is a key shipping route and separates the continents of Asia and Africa."
+      },
+      {
+        "question": "The mountain range that separates the Punjab-Haryana plain from the Indo-Gangetic Plain is",
+        "options": [
+          "A. The Aravalli Range",
+          "B. The Shivalik Hills",
+          "C. The Vindhya Range",
+          "D. The Satpura Range"
+        ],
+        "answer": "B",
+        "explanation": "The Shivalik Hills, also known as the Sub-Himalayan range, is a mountain range that runs parallel to the Himalayas and forms the boundary between the Punjab-Haryana plain and the Indo-Gangetic Plain. This range is composed of recent and unconsolidated rocks and is the result of the convergence of the Indian and Eurasian tectonic plates."
+      },
+      {
+        "question": "Which of the following mountain passes is the highest in the world, connecting India and China?",
+        "options": [
+          "A. Shipki La",
+          "B. Mana Pass",
+          "C. Nathu La",
+          "D. Niti Pass"
+        ],
+        "answer": "B",
+        "explanation": "Mana Pass, situated at an elevation of 5,636 meters above sea level, is the highest mountain pass in the world that connects India and China. It is located in the Himalayas, in the Uttarakhand state of India, and is a critical pass in the India-Tibet border."
+      },
+      {
+        "question": "Which of the following rivers is known for its horseshoe-shaped meanders?",
+        "options": [
+          "A. Brahmaputra",
+          "B. Teesta",
+          "C. Kosi",
+          "D. Damodar"
+        ],
+        "answer": "B",
+        "explanation": "The Teesta River is known for its unique horseshoe-shaped meanders. These meanders are formed due to the river's high sinuosity and the geomorphological characteristics of the region it flows through. The Teesta River flows through the Eastern Himalayas and is a significant river in the state of Sikkim and the northern parts of West Bengal."
+      },
+      {
+        "question": "The term 'Tsingy' refers to a unique limestone karst landscape characterized by a network of sharp peaks, canyons, and forests, primarily found in which of the following countries?",
+        "options": [
+          "A. South Africa",
+          "B. Madagascar",
+          "C. Australia",
+          "D. Brazil"
+        ],
+        "answer": "B",
+        "explanation": "Tsingy is a unique type of limestone karst landscape that is primarily found in Madagascar. The term 'Tsingy' is derived from the Malagasy language, meaning 'where one cannot walk'. This landscape is characterized by a network of sharp peaks, canyons, and forests, formed through the erosion of limestone rocks over millions of years. The Tsingy de Bemaraha National Park in Madagascar is a famous example of this unique geological formation and is a UNESCO World Heritage Site."
+      },
+      {
+        "question": "The mountain range that separates the drainage basins of the Ganga and the Brahmaputra is",
+        "options": [
+          "A.Karakoram range",
+          "B. Kailash range",
+          "C. Greater Himalayas",
+          "D. Patkai range"
+        ],
+        "answer": "C",
+        "explanation": "The Greater Himalayas, also known as the Himadri, is the highest and northernmost range of the Himalayan mountain system. It acts as a divide between the drainage basins of the Ganga and the Brahmaputra rivers. The Greater Himalayas includes famous peaks like Mount Everest and K2, and is characterised by heavy snowfall and glaciation."
+      },
+      {
+        "question": "The mountain range that stretches from the Gulf of Kutch in the west to the Hooghly River in the east, passing through the states of Gujarat, Madhya Pradesh, and Chhattisgarh, is known as",
+        "options": [
+          "A. The Aravalli Range",
+          "B. The Vindhyan Range",
+          "C. The Satpura Range",
+          "D. The Narmada-Son Lineament"
+        ],
+        "answer": "B",
+        "explanation": "The Vindhyan Range is a mountain range in central India that stretches from the Gulf of Kutch in the west to the Hooghly River in the east, passing through the states of Gujarat, Madhya Pradesh, and Chhattisgarh. It is one of the oldest and most erosion-resistant ranges in India, with rocks dating back to the Precambrian era. The range is not as high as the Himalayas, but it is an important geological feature that has played a significant role in shaping the landscape and climate of the region."
+      }
+    ],
+    "timestamp": 1747321071.4249942
+  }
+}
