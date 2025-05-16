@@ -2,11 +2,10 @@ import streamlit as st
 from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 import json, os, time
-import requests
 
-# # Constants
-# CACHE_FILE = "questions_cache.json"
-# EXPIRY_DURATION = 86400  # 24 hours
+# Constants
+CACHE_FILE = "questions_cache.json"
+EXPIRY_DURATION = 86400  # 24 hours
 
 # Langchain & API setup
 GROQ_API_KEY = st.secrets.get("LLM_API_KEY")
@@ -131,29 +130,16 @@ h1, h2, h3, h4, h5, h6 {
 # </style>
 # """, unsafe_allow_html=True)
 
-@st.cache_data(ttl=86400)
+# Cache utils
 def load_cache():
-    url = "https://raw.githubusercontent.com/BHarat8600/streamlit_upsc_test/main/questions_cache.json"
-    
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return response.json()
-    except Exception as e:
-        st.error(f"Failed to load questions from GitHub: {e}")
-        return {}
+    if os.path.exists(CACHE_FILE):
+        with open(CACHE_FILE, "r") as f:
+            return json.load(f)
+    return {}
 
-#changed 16-05-2025 -take question from github
-# # Cache utils
-# def load_cache():
-#     if os.path.exists(CACHE_FILE):
-#         with open(CACHE_FILE, "r") as f:
-#             return json.load(f)
-#     return {}
-
-# def save_cache(cache):
-#     with open(CACHE_FILE, "w") as f:
-#         json.dump(cache, f, indent=2)
+def save_cache(cache):
+    with open(CACHE_FILE, "w") as f:
+        json.dump(cache, f, indent=2)
 
 def is_cache_valid(timestamp):
     return (time.time() - timestamp) < EXPIRY_DURATION
