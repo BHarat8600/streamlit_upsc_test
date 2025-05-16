@@ -131,13 +131,16 @@ h1, h2, h3, h4, h5, h6 {
 # </style>
 # """, unsafe_allow_html=True)
 
-@st.cache_data(ttl=86400)  # Cache for 24 hours
+@st.cache_data(ttl=86400)
 def load_cache():
-    url = "https://github.com/BHarat8600/streamlit_upsc_test/blob/main/questions_cache.json"
-    response = requests.get(url)
-    if response.status_code == 200:
+    url = "https://raw.githubusercontent.com/BHarat8600/streamlit_upsc_test/main/questions_cache.json"
+    
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
         return response.json()
-    else:
+    except Exception as e:
+        st.error(f"Failed to load questions from GitHub: {e}")
         return {}
 
 #changed 16-05-2025 -take question from github
