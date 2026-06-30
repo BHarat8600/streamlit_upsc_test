@@ -1,7 +1,10 @@
 import streamlit as st
 from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
-import json, os, time
+import json
+import os
+import time
+import re
 
 # Constants
 CACHE_FILE = "questions_cache.json"
@@ -9,8 +12,6 @@ EXPIRY_DURATION = 86400  # 24 hours
 
 # Langchain & API setup
 GROQ_API_KEY = st.secrets.get("LLM_API_KEY")
-
-#GROQ_API_KEY = st.secrets.get("LLM_API_KEY")
 
 llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=1.5, groq_api_key=GROQ_API_KEY)
 
@@ -30,7 +31,6 @@ Format output strictly as JSON (without code block markers like
 """
 )
 
-#modified last
 st.markdown("""
 <style>
 /* Entire app container background */
@@ -65,14 +65,6 @@ st.markdown("""
     color: #22c55e !important; /* ✅ Tailwind green-500 */
 }
 
-
-# .stRadio > div {
-#     background-color: #111827;
-#     padding: 10px;
-#     border-radius: 6px;
-#     box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
-# }
-
 /* Title and headers */
 h1, h2, h3, h4, h5, h6 {
     color: #e2e8f0 !important;
@@ -100,37 +92,6 @@ h1, h2, h3, h4, h5, h6 {
 </style>
 """, unsafe_allow_html=True)
 
-
-
-
-
-
-
-# # Styling
-# st.markdown("""
-# <style>
-# body {
-#     background-color: #000000;
-# }
-# [data-testid="stAppViewContainer"] {
-#     background: linear-gradient(120deg, #f4f6f9, #dfe9f3);
-# }
-# .stButton > button {
-#     background-color: #4CAF50;
-#     color: white;
-#     font-weight: bold;
-#     padding: 10px 20px;
-#     border-radius: 8px;
-# }
-# .stRadio > div {
-#     background-color: black;
-#     padding: 10px;
-#     border-radius: 6px;
-#     box-shadow: 0 0 6px rgba(0,0,0,0.1);
-# }
-# </style>
-# """, unsafe_allow_html=True)
-
 # Cache utils
 def load_cache():
     if os.path.exists(CACHE_FILE):
@@ -150,7 +111,11 @@ def generate_questions(subject):
     for _ in range(15):
         result = (template | llm).invoke({"subject": subject})
         try:
-            q_json = json.loads(result.content.strip())
+            # Robust JSON parsing
+            content = result.content.strip()
+            if content.startswith("```json"):
+                content = content.replace("```json", "").replace("```", "").strip()
+            q_json = json.loads(content)
             new_questions.append(q_json)
         except Exception as e:
             print("❌ Parse failed:", e)
@@ -191,14 +156,6 @@ def reset_quiz():
     st.session_state.subject = None
     st.session_state.skipped = []
 
-
-# def reset_quiz():
-#     for key in ["quiz_started", "questions", "answers", "current_index", "subject", "skipped"]:
-#         st.session_state[key] = [] if "list" in str(type(st.session_state.get(key))) else None
-#     st.session_state.quiz_started = False
-
-index = st.session_state.current_index or 0
-
 # --- MAIN APP ---
 st.title("UPSC Mock Test MCQ")
 
@@ -207,20 +164,14 @@ if not st.session_state.quiz_started:
     subjects = ["Polity", "History", "Geography", "Economy"]
     subject = st.selectbox("Subject", subjects)
 
-    # if st.button("Start Test"):
-    #     st.session_state.subject = subject
-    #     st.session_state.quiz_started = True
-    #     with st.spinner("🔄 Kindly wait please... Generating questions..."):
-    #         generate_questions(subject)
-
-
     if st.button("🚀 Start Test"):
         st.session_state.subject = subject
-        st.session_state.questions = get_questions(subject)
-        st.session_state.quiz_started = True
-        with st.spinner("🔄 Kindly wait please..."):
-            generate_questions(subject)
-        
+        with st.spinner("🔄 Kindly wait please... Generating questions..."):
+            st.session_state.questions = get_questions(subject)
+            st.session_state.quiz_started = True
+        st.rerun()
+    else:
+        st.info("Please select a subject and click 'Start Test' to begin.")
 
 else:
     questions = st.session_state.questions
