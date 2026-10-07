@@ -1,175 +1,15 @@
+from pathlib import Path
+
 import streamlit as st
-from langchain.prompts import PromptTemplate
-from langchain_groq import ChatGroq
-import json, os, time
 
-# Constants
-CACHE_FILE = "questions_cache.json"
-EXPIRY_DURATION = 86400  # 24 hours
+from questions import get_questions
 
-# Langchain & API setup
-GROQ_API_KEY = st.secrets.get("LLM_API_KEY")
-
-#GROQ_API_KEY = st.secrets.get("LLM_API_KEY")
-
-llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=1.5, groq_api_key=GROQ_API_KEY)
-
-template = PromptTemplate(
-    input_variables=["subject"],
-    template="""
-You are a UPSC civil services prelims paper-setter. Analyse previous 10 year of upsc civil services and past 1 year current affier, Create one high-quality MCQ for the subject: {subject}.
-Format output strictly as JSON (without code block markers like 
-):
-
-{{
-  "question": "...",
-  "options": ["A. ...", "B. ...", "C. ...", "D. ..."],
-  "answer": "B",
-  "explanation": "..."
-}}
-"""
+st.set_page_config(page_title="UPSC Mock Test")
+st.markdown(
+    "<style>" + (Path(__file__).parent / "assets" / "style.css").read_text(encoding="utf-8") + "</style>",
+    unsafe_allow_html=True,
 )
 
-#modified last
-st.markdown("""
-<style>
-/* Entire app container background */
-[data-testid="stAppViewContainer"] {
-    background: linear-gradient(120deg, #2e3b4e, #1e293b);
-    padding: 1rem;
-    color: #ffffff !important;
-}
-
-/* Force white text throughout */
-.stMarkdown, .stText, .stRadio label, .stSelectbox, .stButton {
-    color: #ffffff !important;
-}
-
-/* Buttons */
-.stButton > button {
-    background-color: #4CAF50;
-    color: white !important;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* Radio buttons */
-.stRadio > div {
-    background-color: #111827;
-    padding: 10px;
-    border-radius: 6px;
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
-    color: #22c55e !important; /* ✅ Tailwind green-500 */
-}
-
-
-# .stRadio > div {
-#     background-color: #111827;
-#     padding: 10px;
-#     border-radius: 6px;
-#     box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
-# }
-
-/* Title and headers */
-h1, h2, h3, h4, h5, h6 {
-    color: #e2e8f0 !important;
-}
-
-/* Custom question box */
-.question-box {
-    background: #1f2937;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 12px rgba(255,255,255,0.1);
-    margin-bottom: 20px;
-}
-
-/* Mobile responsiveness */
-@media screen and (max-width: 768px) {
-    .stButton button {
-        font-size: 14px !important;
-        padding: 8px 16px !important;
-    }
-    .stRadio > div {
-        font-size: 14px !important;
-    }
-}
-</style>
-""", unsafe_allow_html=True)
-
-
-
-
-
-
-
-# # Styling
-# st.markdown("""
-# <style>
-# body {
-#     background-color: #000000;
-# }
-# [data-testid="stAppViewContainer"] {
-#     background: linear-gradient(120deg, #f4f6f9, #dfe9f3);
-# }
-# .stButton > button {
-#     background-color: #4CAF50;
-#     color: white;
-#     font-weight: bold;
-#     padding: 10px 20px;
-#     border-radius: 8px;
-# }
-# .stRadio > div {
-#     background-color: black;
-#     padding: 10px;
-#     border-radius: 6px;
-#     box-shadow: 0 0 6px rgba(0,0,0,0.1);
-# }
-# </style>
-# """, unsafe_allow_html=True)
-
-# Cache utils
-def load_cache():
-    if os.path.exists(CACHE_FILE):
-        with open(CACHE_FILE, "r") as f:
-            return json.load(f)
-    return {}
-
-def save_cache(cache):
-    with open(CACHE_FILE, "w") as f:
-        json.dump(cache, f, indent=2)
-
-def is_cache_valid(timestamp):
-    return (time.time() - timestamp) < EXPIRY_DURATION
-
-def generate_questions(subject):
-    new_questions = []
-    for _ in range(15):
-        result = (template | llm).invoke({"subject": subject})
-        try:
-            q_json = json.loads(result.content.strip())
-            new_questions.append(q_json)
-        except Exception as e:
-            print("❌ Parse failed:", e)
-    return new_questions
-
-def get_questions(subject):
-    cache = load_cache()
-    if subject in cache and is_cache_valid(cache[subject]["timestamp"]):
-        return cache[subject]["questions"]
-    else:
-        questions = generate_questions(subject)
-        cache[subject] = {
-            "questions": questions,
-            "timestamp": time.time()
-        }
-        save_cache(cache)
-        return questions
-
-# Session state setup
 if "quiz_started" not in st.session_state:
     st.session_state.quiz_started = False
 if "questions" not in st.session_state:
@@ -184,6 +24,9 @@ if "skipped" not in st.session_state:
     st.session_state.skipped = []
 
 def reset_quiz():
+    for key in list(st.session_state):
+        if key.startswith("q_"):
+            del st.session_state[key]
     st.session_state.quiz_started = False
     st.session_state.questions = []
     st.session_state.answers = []
@@ -192,14 +35,6 @@ def reset_quiz():
     st.session_state.skipped = []
 
 
-# def reset_quiz():
-#     for key in ["quiz_started", "questions", "answers", "current_index", "subject", "skipped"]:
-#         st.session_state[key] = [] if "list" in str(type(st.session_state.get(key))) else None
-#     st.session_state.quiz_started = False
-
-index = st.session_state.current_index or 0
-
-# --- MAIN APP ---
 st.title("UPSC Mock Test MCQ")
 
 if not st.session_state.quiz_started:
@@ -207,20 +42,27 @@ if not st.session_state.quiz_started:
     subjects = ["Polity", "History", "Geography", "Economy"]
     subject = st.selectbox("Subject", subjects)
 
-    # if st.button("Start Test"):
-    #     st.session_state.subject = subject
-    #     st.session_state.quiz_started = True
-    #     with st.spinner("🔄 Kindly wait please... Generating questions..."):
-    #         generate_questions(subject)
-
-
-    if st.button("🚀 Start Test"):
+    if st.button("Start Test"):
+        try:
+            api_key = st.secrets.get("LLM_API_KEY")
+        except FileNotFoundError:
+            api_key = None
+        if not api_key:
+            st.error("Add LLM_API_KEY to .streamlit/secrets.toml before starting a test.")
+            st.stop()
+        try:
+            with st.spinner("Generating questions. This may take a minute..."):
+                questions = get_questions(subject, api_key)
+        except Exception:
+            st.error("Could not load questions. Check your API key and connection, then try again.")
+            st.stop()
+        if not questions:
+            st.error("No valid questions were generated. Please try again.")
+            st.stop()
         st.session_state.subject = subject
-        st.session_state.questions = get_questions(subject)
+        st.session_state.questions = questions
         st.session_state.quiz_started = True
-        with st.spinner("🔄 Kindly wait please..."):
-            generate_questions(subject)
-        
+        st.rerun()
 
 else:
     questions = st.session_state.questions
